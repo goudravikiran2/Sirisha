@@ -1,0 +1,118 @@
+1.Admin details
+create table Admin(
+                 adId int primary key,
+                 ademail varchar(20);
+                 adpassword varchar(20) NOT NULL,
+                 name varchar(20) NOT NULL,
+                 no_of cars int NOT NULL,
+                 cusId int,
+                 Driver_id int,
+                 CONSTRAINT FOREIGN KEY(cusId) REFERENCES Register_Details(cusId)
+                 CONSTRAINT FOREIGN KEY( Driver_id) REFERENCES Driver_Details( Driver_id)      
+);
+
+
+2.Register table. 
+
+create table Register_Details(
+                      CusId int PRIMARY KEY, 
+
+                       Name varchar(32) NOT NULL,
+
+                       Contacts int NOT NULL, 
+          
+                       mail_id varchar(100) NOT NULL UNIQUE,
+ 
+                       password varchar(20)NOT NULL UNIQUE
+);
+
+3.user_details.
+
+create table Login_details(
+                    mail_id varchar(100) NOT NULL,
+                    password varchar(20)NOT NULL,
+                    CONSTRAINT Register_Details UNIQUE(mail_id,password)
+                    CusId int ,
+                    CONSTRAINT FOREIGN KEY(cusId) REFERENCES Register_Details(cusId)
+);
+4.Car Details
+
+create table car_details (
+
+              carno varchar(30) PRIMARY KEY, 
+
+              no_of_seats int NOT NULL,
+ 
+              priceperkm int NOT NULL,
+ 
+              milegeperlitre int NOT NULL,
+   
+              car_type varchar(20) NOT NULL,
+
+              car_model varchar(20) NOT NULL
+
+              );
+
+
+5.Coupon Details
+     
+create table Coupon(
+
+              coID int PRIMARY KEY,
+              Co_name varchar(20) NOT NULL,
+              Amount int NOT NULL
+
+             ); 
+
+
+6.Driver details
+
+           Create table Driver_details(
+              
+           Driver_id int PRIMARY KEY,
+  
+           Name varchar(20) NOT NULL,
+        
+           DLNO varchar(20) NOT NULL,
+
+           Gender varchar(20) NOT NULL,
+
+           Email_id varchar(20) NOT NULL,
+
+           Mobile int NOT NULL, 
+
+           cusId int,
+
+           CONSTRAINT FOREIGN KEY(cusId) REFERENCES Register_Details(cusId)       
+);
+
+
+7.Booking Details
+
+         create table booking_details1(
+                       Pickup DATETIME NOT NULL,
+                       Dropout DATETIME NOT NULL,
+                       Amount int NOT NULL,
+                       Booking_status varchar(20) NOT NULL,
+                       Drive_option varchar(20),
+                       Book_id int NOT NULL,
+		       carno varchar(30),
+		       CoID int,
+                       Bdate DATE NOT NULL,
+                       Security_deposit int NOT NULL,
+                       cusId int,
+                       Driver_id int,
+                       CONSTRAINT FOREIGN KEY(Driver_id) REFERENCES Driver_details(Driver_id),
+                       CONSTRAINT FOREIGN KEY(cusId) REFERENCES Register_Details(cusId),  
+                       CONSTRAINT FOREIGN KEY(carno) REFERENCES car_details(carno),
+                       CONSTRAINT FOREIGN KEY(CoiID) REFERENCES Coupon(CoiID)
+);              
+                 
+
+
+ 
+
+
+
+
+              
